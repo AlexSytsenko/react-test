@@ -15,7 +15,7 @@ const App = () => {
       <Panel>
         <p>фівлдаофждвілаофд ловафдао вдфілао длфова</p></Panel>
       <Logo text="Главный компонент" />
-      <PaintingList paintings={paintings123}/>
+      <PaintingList paintings={paintings16585}/>
     </div>
   );
 };
