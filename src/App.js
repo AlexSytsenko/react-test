@@ -9,13 +9,13 @@ const App = () => {
   return (
     <div>
       <Panel title="Свежие новости">
-        <p>lorem20asdffffffffffsdfasdfasdf dfsdafasdf asdf asdfadfadfadf dfdf    dfsf</p>
+        <p>lorem20asdffffffffffsdfasdfasdf dfsdafasdf asdf asdfadfadfadf dfdf</p>
         <a href=""></a>
       </Panel>
       <Panel>
         <p>фівлдаофждвілаофд ловафдао вдфілао длфова</p></Panel>
       <Logo text="Главный компонент" />
-      <PaintingList paintings={paintings}/>
+      <PaintingList paintings={paintings16}/>
     </div>
   );
 };
