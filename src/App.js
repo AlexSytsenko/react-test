@@ -42,13 +42,13 @@ class App extends Component {
       <>
         <h1>Состояние компонента</h1>
 
-        <Counter />
+        {/* <Counter /> */}
 
-        <Form onSubmit={this.formsubmitHandler} />
+        {/* <Form onSubmit={this.formsubmitHandler} /> */}
 
-        {/* <Dropdown />
+        {/* <Dropdown /> */}
 
-      <ColorPicker options={colorPickerOptions} /> */}
+        <ColorPicker options={colorPickerOptions} />
 
         {/* <div>
           <p>Общее количество: {totalTodoCount}</p>
