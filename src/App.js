@@ -3,6 +3,7 @@ import Counter from './components/Counter';
 import Dropdown from './components/Dropdown/Dropdown';
 import ColorPicker from './components/ColorPicker';
 import TodoList from './components/TodoList';
+import TodoEditor from './components/TodoEditor';
 import Form from './components/Form';
 import initialTodos from './data/todos.json';
 
@@ -23,6 +24,27 @@ class App extends Component {
   deleteTodo = todoId => {
     this.setState(prevState => ({
       todos: prevState.todos.filter(todo => todo.id !== todoId),
+    }));
+  };
+
+  toggleCompleted = todoId => {
+    //   this.setState(prevState => ({
+    //     todos: prevState.todos.map(todo => {
+    //       if (todo.id === todoId) {
+    //         return {
+    //           ...todo,
+    //           completed: !todo.completed,
+    //         };
+    //       }
+
+    //       return todo;
+    //     }),
+    //   }));
+    // };
+    this.setState(({ todos }) => ({
+      todos: todos.map(todo =>
+        todo.id === todoId ? { ...todo, completed: !todo.completed } : todo,
+      ),
     }));
   };
 
@@ -48,14 +70,20 @@ class App extends Component {
 
         {/* <Dropdown /> */}
 
-        <ColorPicker options={colorPickerOptions} />
+        {/* <ColorPicker options={colorPickerOptions} /> */}
 
         {/* <div>
           <p>Общее количество: {totalTodoCount}</p>
           <p>Количество выполненных: {completedTodosCount}</p>
         </div> */}
 
-        {/* <TodoList todos={todos} onDeleteTodo={this.deleteTodo} /> */}
+        <TodoEditor />
+
+        <TodoList
+          todos={todos}
+          onDeleteTodo={this.deleteTodo}
+          onToggleCompleted={this.toggleCompleted}
+        />
       </>
     );
   }
