@@ -1,10 +1,16 @@
 // import './TodoList.css';
+import classNames from 'classnames';
 import './TodoList.scss';
 
 const TodoList = ({ todos, onDeleteTodo, onToggleCompleted }) => (
   <ul className="TodoList">
     {todos.map(({ id, text, completed }) => (
-      <li key={id} className="TodoList__item">
+      <li
+        key={id}
+        className={classNames('TodoList__item', {
+          'TodoList__item--completed': completed,
+        })}
+      >
         <input
           type="checkbox"
           className="TodoList__checkbox"
@@ -13,7 +19,11 @@ const TodoList = ({ todos, onDeleteTodo, onToggleCompleted }) => (
         />
 
         <p className="TodoList__text">{text}</p>
-        <button type="button" onClick={() => onDeleteTodo(id)}>
+        <button
+          className="TodoList__btn"
+          type="button"
+          onClick={() => onDeleteTodo(id)}
+        >
           Удалить
         </button>
       </li>

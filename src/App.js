@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import shortid from 'shortid';
 import Counter from './components/Counter';
 import Dropdown from './components/Dropdown/Dropdown';
 import ColorPicker from './components/ColorPicker';
@@ -19,6 +20,19 @@ const colorPickerOptions = [
 class App extends Component {
   state = {
     todos: initialTodos,
+  };
+
+  //Получаем новую туду из ТудуЕдитор!
+  addTodo = text => {
+    const todo = {
+      id: shortid.generate(),
+      text,
+      completed: false,
+    };
+
+    this.setState(({ todos }) => ({
+      todos: [todo, ...todos],
+    }));
   };
 
   deleteTodo = todoId => {
@@ -72,12 +86,12 @@ class App extends Component {
 
         {/* <ColorPicker options={colorPickerOptions} /> */}
 
-        {/* <div>
+        <div>
           <p>Общее количество: {totalTodoCount}</p>
           <p>Количество выполненных: {completedTodosCount}</p>
-        </div> */}
+        </div>
 
-        <TodoEditor />
+        <TodoEditor onSubmit={this.addTodo} />
 
         <TodoList
           todos={todos}
