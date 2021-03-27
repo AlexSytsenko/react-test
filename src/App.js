@@ -6,6 +6,7 @@ import ColorPicker from './components/ColorPicker';
 import TodoList from './components/TodoList';
 import TodoEditor from './components/TodoEditor';
 import Form from './components/Form';
+import FilterTodo from './components/FilterTodo';
 import initialTodos from './data/todos.json';
 
 const colorPickerOptions = [
@@ -20,6 +21,7 @@ const colorPickerOptions = [
 class App extends Component {
   state = {
     todos: initialTodos,
+    filter: '',
   };
 
   //Получаем новую туду из ТудуЕдитор!
@@ -66,13 +68,33 @@ class App extends Component {
     console.log(data);
   };
 
-  render() {
+  changeFilter = e => {
+    this.setState({ filter: e.currentTarget.value });
+  };
+
+  getVisibleTodos = () => {
+    const { filter, todos } = this.state;
+    const normalaizedFilter = filter.toLocaleLowerCase(); //Привели фильтр в нижний регистр. в объекте так нельзя...
+
+    return todos.filter(todo =>
+      todo.text.toLowerCase().includes(normalaizedFilter),
+    );
+  };
+
+  calculateCompletedTodos = () => {
     const { todos } = this.state;
-    const totalTodoCount = todos.length;
-    const completedTodosCount = todos.reduce(
+
+    return todos.reduce(
       (total, todo) => (todo.completed ? total + 1 : total),
       0,
     );
+  };
+
+  render() {
+    const { todos, filter } = this.state;
+    const totalTodoCount = todos.length;
+    const completedTodoCount = this.calculateCompletedTodos();
+    const visibleTodos = this.getVisibleTodos();
 
     return (
       <>
@@ -88,13 +110,15 @@ class App extends Component {
 
         <div>
           <p>Общее количество: {totalTodoCount}</p>
-          <p>Количество выполненных: {completedTodosCount}</p>
+          <p>Количество выполненных: {completedTodoCount}</p>
         </div>
 
         <TodoEditor onSubmit={this.addTodo} />
 
+        <FilterTodo value={filter} onChange={this.changeFilter} />
+
         <TodoList
-          todos={todos}
+          todos={visibleTodos} //Рендерим не весь стек Тудушек, а только отфильтрованные.
           onDeleteTodo={this.deleteTodo}
           onToggleCompleted={this.toggleCompleted}
         />
