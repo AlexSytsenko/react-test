@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import shortid from 'shortid';
-import Counter from './components/Counter';
-import Dropdown from './components/Dropdown/Dropdown';
-import ColorPicker from './components/ColorPicker';
+// import Counter from './components/Counter';
+// import Dropdown from './components/Dropdown/Dropdown';
+// import ColorPicker from './components/ColorPicker';
 import TodoList from './components/TodoList';
 import TodoEditor from './components/TodoEditor';
-import Form from './components/Form';
+// import Form from './components/Form';
 import FilterTodo from './components/FilterTodo';
-import initialTodos from './data/todos.json';
+// import initialTodos from './data/todos.json';
+
+import Container from './components/Container';
+import Modal from './components/Modal';
 
 const colorPickerOptions = [
   { label: 'red', color: '#F44336' },
@@ -20,9 +23,25 @@ const colorPickerOptions = [
 
 class App extends Component {
   state = {
-    todos: initialTodos,
+    todos: [],
     filter: '',
+    showModal: false,
   };
+
+  componentDidMount() {
+    const todos = localStorage.getItem('todos');
+    const parsedTodos = JSON.parse(todos);
+
+    if (parsedTodos) {
+      this.setState({ todos: parsedTodos });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.todos !== prevState.todos) {
+      localStorage.setItem('todos', JSON.stringify(this.state.todos));
+    }
+  }
 
   //Получаем новую туду из ТудуЕдитор!
   addTodo = text => {
@@ -90,23 +109,37 @@ class App extends Component {
     );
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    console.log('App componentDidUpdate');
-
-    if (this.state.todos !== prevState.state.todos) {
-      console.log('Updated todos field');
-    }
-  }
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
+  };
 
   render() {
-    const { todos, filter } = this.state;
+    const { todos, filter, showModal } = this.state;
     const totalTodoCount = todos.length;
     const completedTodoCount = this.calculateCompletedTodos();
     const visibleTodos = this.getVisibleTodos();
 
     return (
-      <>
-        <h1>Состояние компонента</h1>
+      <Container>
+        {/* <h1>Состояние компонента</h1> */}
+        <button type="button" onClick={this.toggleModal}>
+          Открыть модалку
+        </button>
+
+        {showModal && (
+          <Modal onClose={this.toggleModal}>
+            <h2>Привет это контент модалки как children</h2>
+            <p>
+              Lorem50sdfasdf asdf asdf asdf sdafadsf asdf asdfdsfsf sdafasdfasdf
+              adfsdfsdsddf dsfsdfdf dsf dsfsddddd
+            </p>
+            <button type="button" onClick={this.toggleModal}>
+              Закрыть
+            </button>
+          </Modal>
+        )}
 
         {/* <Counter /> */}
 
@@ -130,7 +163,7 @@ class App extends Component {
           onDeleteTodo={this.deleteTodo}
           onToggleCompleted={this.toggleCompleted}
         />
-      </>
+      </Container>
     );
   }
 }
