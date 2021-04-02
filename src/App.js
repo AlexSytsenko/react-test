@@ -90,6 +90,14 @@ class App extends Component {
     );
   };
 
+  componentDidUpdate(prevProps, prevState) {
+    console.log('App componentDidUpdate');
+
+    if (this.state.todos !== prevState.state.todos) {
+      console.log('Updated todos field');
+    }
+  }
+
   render() {
     const { todos, filter } = this.state;
     const totalTodoCount = todos.length;
