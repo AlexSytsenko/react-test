@@ -11,6 +11,7 @@ import FilterTodo from './components/FilterTodo';
 
 import Container from './components/Container';
 import Modal from './components/Modal';
+import Clock from './components/Clock';
 
 const colorPickerOptions = [
   { label: 'red', color: '#F44336' },
@@ -124,6 +125,8 @@ class App extends Component {
     return (
       <Container>
         {/* <h1>Состояние компонента</h1> */}
+        <Clock />
+
         <button type="button" onClick={this.toggleModal}>
           Открыть модалку
         </button>
