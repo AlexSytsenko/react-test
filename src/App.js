@@ -14,6 +14,8 @@ import Modal from './components/Modal';
 import Clock from './components/Clock';
 import Tabs from './components/Tabs';
 import tabs from './tabs.json';
+import IconButton from './components/IconButton';
+import { ReactComponent as AddIcon } from './icons/add.svg';
 
 const colorPickerOptions = [
   { label: 'red', color: '#F44336' },
@@ -41,9 +43,16 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.todos !== prevState.todos) {
-      localStorage.setItem('todos', JSON.stringify(this.state.todos));
+    const nextTodos = this.state.todos;
+    const prevTodos = prevState.todos;
+
+    if (nextTodos !== prevTodos) {
+      localStorage.setItem('todos', JSON.stringify(nextTodos));
     }
+
+    // if (nextTodos.length > prevTodos.length && prevTodos.length !== 0) {
+    //   this.toggleModal();
+    // }
   }
 
   //Получаем новую туду из ТудуЕдитор!
@@ -57,6 +66,8 @@ class App extends Component {
     this.setState(({ todos }) => ({
       todos: [todo, ...todos],
     }));
+
+    this.toggleModal();
   };
 
   deleteTodo = todoId => {
@@ -126,27 +137,31 @@ class App extends Component {
 
     return (
       <Container>
+        <IconButton onClick={this.toggleModal} aria-label="Добавить todo">
+          <AddIcon width="40" height="40" fill="white" />
+        </IconButton>
         {/* <h1>Состояние компонента</h1> */}
         {/* <Clock /> */}
 
-        <Tabs items={tabs} />
+        {/* <Tabs items={tabs} /> */}
 
         {/* <button type="button" onClick={this.toggleModal}>
           Открыть модалку
-        </button>
+        </button> */}
 
         {showModal && (
           <Modal onClose={this.toggleModal}>
-            <h2>Привет это контент модалки как children</h2>
+            <TodoEditor onSubmit={this.addTodo} />
+            {/* <h2>Привет это контент модалки как children</h2>
             <p>
               Lorem50sdfasdf asdf asdf asdf sdafadsf asdf asdfdsfsf sdafasdfasdf
               adfsdfsdsddf dsfsdfdf dsf dsfsddddd
             </p>
             <button type="button" onClick={this.toggleModal}>
               Закрыть
-            </button>
+            </button> */}
           </Modal>
-        )} */}
+        )}
 
         {/* <Counter /> */}
 
@@ -161,7 +176,7 @@ class App extends Component {
           <p>Количество выполненных: {completedTodoCount}</p>
         </div>
 
-        <TodoEditor onSubmit={this.addTodo} />
+        {/* <TodoEditor onSubmit={this.addTodo} /> */}
 
         <FilterTodo value={filter} onChange={this.changeFilter} />
 
