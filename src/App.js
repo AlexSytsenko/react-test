@@ -12,6 +12,8 @@ import FilterTodo from './components/FilterTodo';
 import Container from './components/Container';
 import Modal from './components/Modal';
 import Clock from './components/Clock';
+import Tabs from './components/Tabs';
+import tabs from './tabs.json';
 
 const colorPickerOptions = [
   { label: 'red', color: '#F44336' },
@@ -125,9 +127,11 @@ class App extends Component {
     return (
       <Container>
         {/* <h1>Состояние компонента</h1> */}
-        <Clock />
+        {/* <Clock /> */}
 
-        <button type="button" onClick={this.toggleModal}>
+        <Tabs items={tabs} />
+
+        {/* <button type="button" onClick={this.toggleModal}>
           Открыть модалку
         </button>
 
@@ -142,7 +146,7 @@ class App extends Component {
               Закрыть
             </button>
           </Modal>
-        )}
+        )} */}
 
         {/* <Counter /> */}
 
