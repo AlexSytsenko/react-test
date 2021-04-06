@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 axios.defaults.headers.common['Authorization'] =
-  'Bearer 4330ebfabc654a6992c2aa792f3173a3';
+  'Bearer e4819cc6c6aa44caa2653b01f97e1426';
 
 const fetchArticles = ({ searchQuery = '', currentPage = 1, pageSize = 5 }) => {
   return axios
@@ -11,4 +11,4 @@ const fetchArticles = ({ searchQuery = '', currentPage = 1, pageSize = 5 }) => {
     .then(response => response.data.articles);
 };
 
-export default fetchArticles;
+export default { fetchArticles };
