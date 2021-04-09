@@ -1,33 +1,54 @@
-import React, { Component } from 'react';
-import shortid from 'shortid';
-// import Counter from './components/Counter';
-// import Dropdown from './components/Dropdown/Dropdown';
-// import ColorPicker from './components/ColorPicker';
-import TodoList from './components/TodoList';
-import TodoEditor from './components/TodoEditor';
-// import Form from './components/Form';
-import FilterTodo from './components/FilterTodo';
-// import initialTodos from './data/todos.json';
+import { Route, NavLink, Switch } from 'react-router-dom';
 
-import Container from './components/Container';
-import Modal from './components/Modal';
-import Clock from './components/Clock';
-import Tabs from './components/Tabs';
-import tabs from './tabs.json';
-import IconButton from './components/IconButton';
-import { ReactComponent as AddIcon } from './icons/add.svg';
-import todosApi from './servises/todos-api';
+import Home from './pages/Home';
+import Authors from './pages/Authors';
+import Books from './pages/Books';
+import NotFoundView from './pages/NotFoundView';
+import BookDetailsView from './pages/BookDetailsView';
 
-import ArticlesView from './components/ArticlesView';
-
-class App extends Component {
-  render() {
-    return (
-      <Container>
-        <ArticlesView />
-      </Container>
-    );
-  }
-}
+const App = () => (
+  <>
+    <ul>
+      <li>
+        <NavLink
+          exact
+          to="/"
+          className="NavLink"
+          activeClassName="NavLink--active"
+        >
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/authors"
+          className="NavLink"
+          activeClassName="NavLink--active"
+        >
+          Authors
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/books"
+          className="NavLink"
+          activeClassName="NavLink--active"
+        >
+          Books
+        </NavLink>
+      </li>
+    </ul>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route path="/authors" component={Authors} />
+      <Route path="/books/:bookId" component={BookDetailsView} />
+      <Route exact path="/books" component={Books} /> //можно поменять местами
+      но нужно тонда поставить exact
+      <Route component={NotFoundView} />
+    </Switch>
+  </>
+);
 
 export default App;
+
+// http://localhost:3000/react-test
