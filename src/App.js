@@ -1,23 +1,27 @@
-import React from 'react';
-import Logo from './components/Logo';
-import PaintingList from './components/PaintingList';
-import Panel from './components/Panel';
-import paintings from './paintings.json';
+import { Route, Switch } from 'react-router-dom';
 
-const App = () => {
+import Home from './pages/Home';
+import Authors from './pages/Authors';
+import Books from './pages/Books';
+import NotFoundView from './pages/NotFoundView';
+import BookDetailsView from './pages/BookDetailsView';
+import routes from './routes';
+import AppBar from './components/AppBar';
 
-  return (
-    <div>
-      <Panel title="Свежие новости">
-        <p>lorem20asdffffffffffsdfasdfasdf dfsdafasdf asdf asdfadfadfadf dfdf    dfsf</p>
-        <a href=""></a>
-      </Panel>
-      <Panel>
-        <p>фівлдаофждвілаофд ловафдао вдфілао длфова</p></Panel>
-      <Logo text="Главный компонент" />
-      <PaintingList paintings={paintings}/>
-    </div>
-  );
-};
+const App = () => (
+  <>
+    <AppBar />
+    <Switch>
+      <Route exact path={routes.home} component={Home} />
+      <Route path={routes.author} component={Authors} />
+      <Route exact path={routes.books} component={Books} /> //можно поменять
+      <Route path={routes.bookDetails} component={BookDetailsView} />
+      местами но нужно тонда поставить exact
+      <Route component={NotFoundView} />
+    </Switch>
+  </>
+);
 
 export default App;
+
+// http://localhost:3000/react-test
