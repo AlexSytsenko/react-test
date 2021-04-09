@@ -1,49 +1,22 @@
-import { Route, NavLink, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Authors from './pages/Authors';
 import Books from './pages/Books';
 import NotFoundView from './pages/NotFoundView';
 import BookDetailsView from './pages/BookDetailsView';
+import routes from './routes';
+import AppBar from './components/AppBar';
 
 const App = () => (
   <>
-    <ul>
-      <li>
-        <NavLink
-          exact
-          to="/"
-          className="NavLink"
-          activeClassName="NavLink--active"
-        >
-          Home
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/authors"
-          className="NavLink"
-          activeClassName="NavLink--active"
-        >
-          Authors
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/books"
-          className="NavLink"
-          activeClassName="NavLink--active"
-        >
-          Books
-        </NavLink>
-      </li>
-    </ul>
+    <AppBar />
     <Switch>
-      <Route exact path="/" component={Home} />
-      <Route path="/authors" component={Authors} />
-      <Route path="/books/:bookId" component={BookDetailsView} />
-      <Route exact path="/books" component={Books} /> //можно поменять местами
-      но нужно тонда поставить exact
+      <Route exact path={routes.home} component={Home} />
+      <Route path={routes.author} component={Authors} />
+      <Route exact path={routes.books} component={Books} /> //можно поменять
+      <Route path={routes.bookDetails} component={BookDetailsView} />
+      местами но нужно тонда поставить exact
       <Route component={NotFoundView} />
     </Switch>
   </>

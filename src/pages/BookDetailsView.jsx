@@ -28,7 +28,7 @@ class BookDetailsView extends Component {
         <img src={imgUrl} alt="" />
         <h2>{title}</h2>
         {author && <p>Автор: {author.name}</p>}
-        <p>Жанр: {genre}</p>
+        <p>{genre}</p>
         <p>{descr}</p>
       </>
     );
