@@ -1,23 +1,33 @@
-import React from 'react';
-import Logo from './components/Logo';
-import PaintingList from './components/PaintingList';
-import Panel from './components/Panel';
-import paintings from './paintings.json';
+import React, { Component } from 'react';
+import shortid from 'shortid';
+// import Counter from './components/Counter';
+// import Dropdown from './components/Dropdown/Dropdown';
+// import ColorPicker from './components/ColorPicker';
+import TodoList from './components/TodoList';
+import TodoEditor from './components/TodoEditor';
+// import Form from './components/Form';
+import FilterTodo from './components/FilterTodo';
+// import initialTodos from './data/todos.json';
 
-const App = () => {
+import Container from './components/Container';
+import Modal from './components/Modal';
+import Clock from './components/Clock';
+import Tabs from './components/Tabs';
+import tabs from './tabs.json';
+import IconButton from './components/IconButton';
+import { ReactComponent as AddIcon } from './icons/add.svg';
+import todosApi from './servises/todos-api';
 
-  return (
-    <div>
-      <Panel title="Свежие новости">
-        <p>lorem20asdffffffffffsdfasdfasdf dfsdafasdf asdf asdfadfadfadf dfdf    dfsf</p>
-        <a href=""></a>
-      </Panel>
-      <Panel>
-        <p>фівлдаофждвілаофд ловафдао вдфілао длфова</p></Panel>
-      <Logo text="Главный компонент" />
-      <PaintingList paintings={paintings}/>
-    </div>
-  );
-};
+import ArticlesView from './components/ArticlesView';
+
+class App extends Component {
+  render() {
+    return (
+      <Container>
+        <ArticlesView />
+      </Container>
+    );
+  }
+}
 
 export default App;
