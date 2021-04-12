@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Component } from 'react';
 import { NavLink, Route } from 'react-router-dom';
 
-import AuthorsBooks from '../components/AuthorsBooks';
+import BookList from '../components/BookList';
 
 class Authors extends Component {
   state = {
@@ -19,13 +19,13 @@ class Authors extends Component {
 
   render() {
     const { match } = this.props;
+
     return (
-      <>
-        <h1>Это страница fвторов</h1>
+      <div className="container-fluid">
         <ul>
-          {this.state.authors.map(author => (
-            <li key={author.id}>
-              <NavLink to={`${match.url}/${author.id}`}>{author.name}</NavLink>
+          {this.state.authors.map(({ id, name }) => (
+            <li key={id}>
+              <NavLink to={`${match.url}/${id}`}>{name}</NavLink>
             </li>
           ))}
         </ul>
@@ -37,10 +37,17 @@ class Authors extends Component {
 
             const author = this.state.authors.find(({ id }) => id === bookId);
 
-            return author && <AuthorsBooks {...props} books={author.books} />;
+            return (
+              author && (
+                <>
+                  <h2>Книги автора: {author.name}</h2>
+                  <BookList {...props} books={author.books} />
+                </>
+              )
+            );
           }}
-        ></Route>
-      </>
+        />
+      </div>
     );
   }
 }

@@ -7,25 +7,17 @@ const Navigation = () => {
       <NavLink
         exact
         to={routes.home}
-        className="NavLink"
-        activeClassName="NavLink--active"
+        className="nav-link"
+        activeClassName="active"
       >
         Home
       </NavLink>
 
-      <NavLink
-        to={routes.author}
-        className="NavLink"
-        activeClassName="NavLink--active"
-      >
+      <NavLink to={routes.author} className="nav-link" activeClassName="active">
         Authors
       </NavLink>
 
-      <NavLink
-        to={routes.books}
-        className="NavLink"
-        activeClassName="NavLink--active"
-      >
+      <NavLink to={routes.books} className="nav-link" activeClassName="active">
         Books
       </NavLink>
     </nav>
