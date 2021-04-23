@@ -1,36 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import 'modern-normalize/modern-normalize.css';
+import './styles/base.scss';
+import { BrowserRouter } from 'react-router-dom';
 
+import { Provider } from 'react-redux';
 
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// );
-
-
+import store from './redux/store';
 
 ReactDOM.render(
-    <React.StrictMode>
+  <React.StrictMode>
+    <BrowserRouter>
+      <Provider store={store}>
         <App />
-    </React.StrictMode>,
-    document.getElementById('root')
+      </Provider>
+    </BrowserRouter>
+  </React.StrictMode>,
+  document.getElementById('root'),
 );
-
-
-const painting = {
-    "id": "id-1",
-    "url": "https://cdn.pixabay.com/photo/2017/07/31/22/05/feathers-2561511_1280.jpg",
-    "title": "Feathers. Art abstract",
-    "price": 500,
-    "author": {
-        "tag": "ractapopulous",
-        "url": "https://pixabay.com/users/ractapopulous-24766/"
-    },
-    "quantity": 10
-};
-
-
-
